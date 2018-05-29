@@ -4,3 +4,4 @@ tmp/
 keys/
 config.json
 vendor/
+test_data/
