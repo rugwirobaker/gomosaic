@@ -1,0 +1,6 @@
+.idea/
+.vscode/
+tmp/
+keys/
+config.json
+vendor/
