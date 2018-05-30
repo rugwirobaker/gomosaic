@@ -4,6 +4,7 @@ import (
 	"encoding/base64"
 	"image"
 	_ "image/jpeg"
+	"reflect"
 	"strings"
 	"testing"
 )
@@ -69,6 +70,33 @@ func TestResize(t *testing.T) {
 	}
 	//var diffRatio float64 // 0.50
 }
+
+func TestAverageColor(t *testing.T) {
+	reader := base64.NewDecoder(base64.StdEncoding, strings.NewReader(data))
+	img, _, err := image.Decode(reader)
+	if err != nil {
+		t.Error("Got error:'", err, "'while trying to decode test img")
+		return
+	}
+	//test the returned type
+	testAvg := AverageColor(img)
+
+	//generate a test value
+	trueAvg := avgColor(img)
+	if reflect.TypeOf(testAvg).Name() != reflect.TypeOf(trueAvg).Name() {
+		t.Error("Expected type: float64 got", reflect.TypeOf(testAvg).Name())
+		return
+	}
+
+	//test if the value is right
+	if testAvg != trueAvg {
+		t.Error("Expected a value of:", trueAvg, "got", testAvg)
+	}
+}
+
+//func TestLoadTilesRepo(t *testing.T) {}
+
+//func TestDecodeImage(t *testing.T) {}
 func avgColor(img image.Image) [3]float64 {
 	bounds := img.Bounds()
 	r, g, b := 0.0, 0.0, 0.0
@@ -81,9 +109,3 @@ func avgColor(img image.Image) [3]float64 {
 	totalPixels := float64(bounds.Max.X * bounds.Max.Y)
 	return [3]float64{r / totalPixels, g / totalPixels, b / totalPixels}
 }
-
-//func TestAverageColor(t *testing.T) {}
-
-//func TestLoadTilesRepo(t *testing.T) {}
-
-//func TestDecodeImage(t *testing.T) {}
