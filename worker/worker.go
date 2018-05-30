@@ -7,7 +7,7 @@ import (
 
 //Resize takes an image object and scales it to the given dimensions(w, h), using
 //the Nearest Neighbor scaling algorithm
-func Resize(src image.Image, newDims []float32) (image.Image, error) {
+func Resize(src image.Image, newDims []float32) image.Image {
 	b := src.Bounds()
 	srcWidth := b.Dx()
 	srcHeight := b.Dy()
@@ -29,5 +29,5 @@ func Resize(src image.Image, newDims []float32) (image.Image, error) {
 				uint8(a >> 8)})
 		}
 	}
-	return target, nil
+	return target
 }

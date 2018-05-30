@@ -27,16 +27,16 @@ func TestResize(t *testing.T) {
 		image.NewAlpha16(image.Rect(0, 0, 50, 50)),
 		image.NewGray16(image.Rect(0, 0, 50, 50)),
 	}
-	img, err := Resize(testImage[0], testScale[0])
+	img := Resize(testImage[0], testScale[0])
 	//Assertion1: test if Resize returns a image
-	if img == nil && err != nil {
-		t.Error("Expected an image output got", err)
+	if img == nil {
+		t.Error("Expected an image output got", img)
 		return
 	}
 	//Assertion1: test if given image has the given new scales
 	for _, i := range testImage {
 		for _, s := range testScale {
-			img, err = Resize(i, s)
+			img = Resize(i, s)
 			//if img.Scales != s then print an error[expected the img to be of size s]
 			imgSize := []int{
 				img.Bounds().Dx(), //width
@@ -54,10 +54,12 @@ func TestResize(t *testing.T) {
 	m, _, err := image.Decode(reader)
 	if err != nil {
 		t.Error("Got error:'", err, "'while trying to decode test img")
+		return
 	}
-	img, err = Resize(m, testScale[0])
-	if err != nil {
-		t.Error("Got error:", err, "while trying to decode test img")
+	img = Resize(m, testScale[0])
+	if img == nil {
+		t.Error("Got error:", img, "while trying to decode test img")
+		return
 	}
 	//tAvgColor := avgColor(m)
 	iAvgColor := avgColor(img)
