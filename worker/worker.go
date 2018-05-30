@@ -45,3 +45,9 @@ func AverageColor(img image.Image) [3]float64 {
 	tPixels := float64(bounds.Max.X * bounds.Max.Y)
 	return [3]float64{r / tPixels, g / tPixels, b / tPixels}
 }
+
+//LoadTileDB takes in image source and returns a hash table with
+//the image names as the key and the average color of each as the value
+func LoadTileDB() map[string][3]float64 {
+	return map[string][3]float64{}
+}

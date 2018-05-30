@@ -94,18 +94,16 @@ func TestAverageColor(t *testing.T) {
 	}
 }
 
-//func TestLoadTilesRepo(t *testing.T) {}
-
-//func TestDecodeImage(t *testing.T) {}
-func avgColor(img image.Image) [3]float64 {
-	bounds := img.Bounds()
-	r, g, b := 0.0, 0.0, 0.0
-	for y := bounds.Min.Y; y < bounds.Max.Y; y++ {
-		for x := bounds.Min.X; x < bounds.Max.X; x++ {
-			r1, g1, b1, _ := img.At(x, y).RGBA()
-			r, g, b = r+float64(r1), g+float64(g1), b+float64(b1)
-		}
+func TestLoadTileDB(t *testing.T) {
+	testDB := map[string][3]float64{}
+	db := LoadTileDB()
+	//type test
+	if reflect.TypeOf(db).Name() != reflect.TypeOf(testDB).Name() {
+		t.Error("Expected type: float64 got", reflect.TypeOf(db).Name())
+		return
 	}
-	totalPixels := float64(bounds.Max.X * bounds.Max.Y)
-	return [3]float64{r / totalPixels, g / totalPixels, b / totalPixels}
+	//test for return value lens
+	//if len(db) == 0 {
+	//t.Error("Expected a hash table LoadDB returned an empty hash table")
+	//}
 }
