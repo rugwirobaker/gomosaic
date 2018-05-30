@@ -28,7 +28,7 @@ jobs:
                 /go/bin/dep ensure
             fi
       - run:
-          name: test
+          name: tests
           command: |
             mkdir -p $GOCACHE
             go build -v
@@ -38,6 +38,9 @@ jobs:
           key: gopkg-{{ .Branch }}-{{ checksum "Gopkg.lock" }}
           paths:
               - /go/src/github.com/rugwirobaker/vendor
+
+      - store_test_results:
+          path:  /tmp/test-results
       # specify any bash command here prefixed with `run: `
       #- run: go get -v -t -d ./...
       #- run: go test -v ./...
