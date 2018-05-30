@@ -2,6 +2,7 @@ package worker
 
 import (
 	"image"
+	"image/color"
 )
 
 //Resize takes an image object and scales it to the given dimensions(w, h), using
@@ -13,13 +14,20 @@ func Resize(src image.Image, newDims []float32) (image.Image, error) {
 	Xfactor := newDims[0] / float32(srcWidth)
 	Yfactor := newDims[1] / float32(srcHeight)
 	//create target image
-	target := image.NewRGBA(image.Rect(int(
+	target := image.NewNRGBA(image.Rect(int(
 		float32(b.Min.X)*Xfactor),
 		int(float32(b.Min.Y)*Yfactor),
 		int(float32(b.Max.X)*Xfactor),
-		int(float32(b.Max.Y)*Yfactor)))
+		int(float32(b.Max.Y)*Yfactor)),
+	)
+	for y, j := b.Min.Y, b.Min.Y; j < b.Max.Y; y, j = y+int(Yfactor),
+		j+1 {
+		for x, i := b.Min.X, b.Min.X; i < b.Max.X; x, i = x+int(Xfactor),
+			i+1 {
+			r, g, b, a := src.At(x, y).RGBA()
+			target.SetNRGBA(i, j, color.NRGBA{uint8(r >> 8), uint8(g >> 8), uint8(b >> 8),
+				uint8(a >> 8)})
+		}
+	}
 	return target, nil
 }
-
-//int32
-//func Rect(x0, y0, x1, y1 int) Rectangle {}
