@@ -1,4 +1,4 @@
-[![CircleCI](https://img.shields.io/circleci/project/github/RedSparr0w/node-csgo-parser.svg)](https://circleci.com/gh/rugwirobaker/gomosaic)
+[![CircleCI](https://img.shields.io/circleci/project/github/RedSparr0w/node-csgo-parser.svg)](https://circleci.com/gh/rugwirobaker/gomosaic) [![Go Report Card](https://goreportcard.com/badge/github.com/rugwirobaker/gomosaic)](https://goreportcard.com/report/github.com/rugwirobaker/gomosaic)
 
 # Mosaic Make
 Mosaic Make is a web application that allows users to upload pictures that are are converted into mosaic artifacts and made available through an online publicly available gallery for the world to admire.
