@@ -2,6 +2,7 @@
 .vscode/
 tmp/
 keys/
+*.key.*
 config.json
 vendor/
 test_data/

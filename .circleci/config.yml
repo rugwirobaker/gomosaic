@@ -18,7 +18,7 @@ jobs:
       #- run: git config --global url.ssh://git@github.com/rugwirobaker
       - restore_cache:
           key: build-cache-{{ .Branch }}-{{ .Environment.CIRCLE_PREVIOUS_BUILD_NUM }}
-          
+
       - run:
           name: download-libraries
           command: |
@@ -33,6 +33,17 @@ jobs:
             mkdir -p /tmp/test-results
             go build -v ./...
             go test -p 6 -race -v ./... #| tee /tmp/test-results
+
+       #deploy 
+      - run : 
+            name: deploy
+            command: | 
+                echo $GCLOUD_SERVICE_KEY | base64 --decode --ignore-garbage > ${HOME}/gcloud-service-key.json
+                sudo /opt/google-cloud-sdk/bin/gcloud --quiet components update
+                sudo /opt/google-cloud-sdk/bin/gcloud auth activate-service-account --key-file ${HOME}/gcloud-service-key.json
+                sudo /opt/google-cloud-sdk/bin/gcloud config set project $GCLOUD_PROJECT
+
+                gcloud -q app deploy engine/app.yaml --promote --version=staging
 
       - save_cache:
           key: gopkg-{{ .Branch }}-{{ checksum "Gopkg.lock" }}
