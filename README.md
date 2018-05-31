@@ -1,4 +1,7 @@
 # Mosaic Make
+
+[![CircleCI](https://circleci.com/gh/rugwirobaker/gomosaic.svg?style=svg)](https://circleci.com/gh/rugwirobaker/gomosaic)
+
 Mosaic Make is a web application that allows users to upload pictures that are are converted into mosaic artifacts and made available through an online publicly available gallery for the world to admire.
 
 ## Motivation
