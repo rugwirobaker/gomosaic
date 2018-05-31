@@ -15,7 +15,7 @@ jobs:
 
     steps:
       - checkout
-      - run: git config --global url.ssh://git@github.com/rugwirobaker
+      #- run: git config --global url.ssh://git@github.com/rugwirobaker
       - restore_cache:
           key: build-cache-{{ .Branch }}-{{ .Environment.CIRCLE_PREVIOUS_BUILD_NUM }}
           
