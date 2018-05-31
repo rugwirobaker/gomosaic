@@ -30,19 +30,14 @@ jobs:
           name: tests
           command: |
             mkdir -p $GOCACHE
+            mkdir -p /tmp/test-results
             go build -v ./...
-            go test -p 6 -race -v ./...
+            go test -p 6 -race -v ./... | tee /tmp/test-results
 
       - save_cache:
           key: gopkg-{{ .Branch }}-{{ checksum "Gopkg.lock" }}
           paths:
               - /go/src/github.com/rugwirobaker/vendor
-    
-      - run:
-         name: Save test results
-         command: |
-            mkdir -p /tmp/test-results
-        when: always
 
       - store_test_results:
           path:  /tmp/test-results
