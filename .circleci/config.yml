@@ -28,6 +28,8 @@ jobs:
             fi
 
             #google app engine
+            curl https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-203.0.0-linux-x86_64.tar.gz
+            gunzip google-cloud-sdk-203.0.0-linux-x86_64.tar.gz && google-cloud-sdk/install.sh
             gcloud --version
       - run:
           name: tests
