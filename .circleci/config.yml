@@ -30,7 +30,7 @@ jobs:
           name: tests
           command: |
             mkdir -p $GOCACHE
-            go build -v
+            go build -v ./...
             go test -p 6 -race -v ./...
 
       - save_cache:
