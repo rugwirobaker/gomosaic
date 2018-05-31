@@ -32,7 +32,7 @@ jobs:
           command: |
             mkdir -p $GOCACHE
             go build -v
-            go test -p 6 -race ./...
+            go test -p 6 -race -v ./...
 
       - save_cache:
           key: gopkg-{{ .Branch }}-{{ checksum "Gopkg.lock" }}
