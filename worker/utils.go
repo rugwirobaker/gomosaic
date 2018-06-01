@@ -1,6 +1,11 @@
 package worker
 
-import "image"
+import (
+	"bytes"
+	"image"
+	"io"
+	"io/ioutil"
+)
 
 func avgColor(img image.Image) [3]float64 {
 	bounds := img.Bounds()
@@ -13,4 +18,12 @@ func avgColor(img image.Image) [3]float64 {
 	}
 	totalPixels := float64(bounds.Max.X * bounds.Max.Y)
 	return [3]float64{r / totalPixels, g / totalPixels, b / totalPixels}
+}
+
+func openFile(path string) (io.Reader, error) {
+	file, err := ioutil.ReadFile(path)
+	if err != nil {
+		return nil, err
+	}
+	return bytes.NewReader(file), nil
 }
