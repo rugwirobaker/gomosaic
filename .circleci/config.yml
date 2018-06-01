@@ -6,7 +6,7 @@ jobs:
   build:
     docker:
       # specify the version
-      - image: codebaker/gomasaic:staging
+      - image: boulangerie/gomosaic:staging
       
     working_directory: /go/src/github.com/rugwirobaker/gomosaic
 
