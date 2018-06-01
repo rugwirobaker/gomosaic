@@ -35,17 +35,19 @@ jobs:
             mkdir -p /tmp/test-results
             go build -v ./...
             go test -p 6 -race -v ./... #| tee /tmp/test-results
+            
+      - run:
+            name: setup gcloud
+            command: |
+                curl -L -o https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-203.0.0-linux-x86_64.tar.gz
+                tar -xz -C /tmp -f /tmp/google-cloud-sdk-203.0.0-linux-x86_64.tar.gz
+                mv /tmp/google-cloud-sdk-203.0.0-linux-x86_64.tar.gz/* /usr/bin
+                ./google-cloud-sdk/install.sh
 
        #deploy 
       - run : 
             name: deploy
             command: 
-                OS_VERSION=$(cat /etc/*release* | grep VERSION_CODENAME)
-                export CLOUD_SDK_REPO="cloud-sdk-$(echo ${OS_VERSION:17})" && \
-                echo "deb http://packages.cloud.google.com/apt $CLOUD_SDK_REPO main" | tee -a /etc/apt/sources.list.d/google-cloud-sdk.list && \
-                curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add - && \
-                apt-get update -y && apt-get install google-cloud-sdk -y
-
                 echo $GCLOUD_SERVICE_KEY > ${HOME}/gcloud-service-key.json
                 gcloud auth activate-service-account --key-file=${HOME}/gcloud-service-key.json
                 gcloud config set project $GCLOUD_PROJECT
