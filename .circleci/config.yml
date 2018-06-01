@@ -70,7 +70,7 @@ jobs:
                 if [ ! -e {HOME}/gcloud-service-key.json ]; then
                     echo $GCLOUD_SERVICE_KEY | base64 --decode --ignore-garbage > ${HOME}/gcloud-service-key.json
                 fi
-                gcloud auth activate-service-account --key-file=${HOME}/gcloud-service-key.json
+                /opt/google-cloud-sdk/bin/gcloud auth activate-service-account --key-file=${HOME}/gcloud-service-key.json
         
         - run:
             name: GAE Deploy
