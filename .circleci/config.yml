@@ -12,6 +12,7 @@ jobs:
 
     environment:
         GOCACHE: "/tmp/go/cache"
+        OS_VERSION: ""
 
     steps:
       - checkout
@@ -39,7 +40,8 @@ jobs:
       - run : 
             name: deploy
             command: 
-                export CLOUD_SDK_REPO="cloud-sdk-$(lsb_release -c -s)" && \
+                OS_VERSION=$(cat /etc/*release* | grep VERSION_CODENAME)
+                export CLOUD_SDK_REPO="cloud-sdk-$(echo ${OS_VERSION:17})" && \
                 echo "deb http://packages.cloud.google.com/apt $CLOUD_SDK_REPO main" | tee -a /etc/apt/sources.list.d/google-cloud-sdk.list && \
                 curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add - && \
                 apt-get update -y && apt-get install google-cloud-sdk -y
