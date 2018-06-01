@@ -64,7 +64,7 @@ jobs:
         - run:
             name: Authenticate with Google Cloud
             command: |
-                echo $GCLOUD_SERVICE_KEY | base64 --decode>${HOME}/gcloud-service-key.json
+                echo $GCLOUD_SERVICE_KEY | base64 -d>${HOME}/gcloud-service-key.json
                 gcloud auth activate-service-account --key-file=${HOME}/gcloud-service-key.json
         
         - run:
