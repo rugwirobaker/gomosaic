@@ -78,6 +78,6 @@ jobs:
             command: git checkout -- .
         
         - save_cache:
-            key: go-app-deploy{{ checksum "project.clj" }}
-            paths: 
-                - /tmp/test-results/
+            key: compojure-app-jars-v1-{{ checksum "project.clj" }}
+            paths:
+                - /home/circleci/.m2
