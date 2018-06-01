@@ -68,7 +68,7 @@ jobs:
             name: Authenticate with Google Cloud
             command: |
                 if [ ! -e {HOME}/gcloud-service-key.json ]; then
-                    echo $GCLOUD_PROJECT | base64 -d>${HOME}/gcloud-service-key.json
+                    echo $GCLOUD_PROJECT | base64 -di>${HOME}/gcloud-service-key.json
                 fi
                 gcloud auth activate-service-account --key-file=${HOME}/gcloud-service-key.json
         
