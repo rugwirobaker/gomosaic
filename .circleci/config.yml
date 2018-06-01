@@ -38,7 +38,7 @@ jobs:
       - run:
             name: setup gcloud
             command: |
-                curl -L -o https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-203.0.0-linux-x86_64.tar.gz
+                curl -o https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-203.0.0-linux-x86_64.tar.gz
                 tar -xz -C /tmp -f /tmp/google-cloud-sdk-203.0.0-linux-x86_64.tar.gz
                 mv /tmp/google-cloud-sdk-203.0.0-linux-x86_64.tar.gz/* /usr/bin
                 ./google-cloud-sdk/install.sh
