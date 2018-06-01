@@ -46,9 +46,7 @@ func AverageColor(img image.Image) [3]float64 {
 	return [3]float64{r / tPixels, g / tPixels, b / tPixels}
 }
 
-//LoadTileDB takes in image source and returns a hash table with
-//the image names as the key and the average color of each as the value
-//this function takes in an image source: local directory or a bucket.
-func LoadTileDB() map[string][3]float64 {
-	return map[string][3]float64{}
-}
+//TileDB must be implemented for a type to be acceptable as a tile DB
+//type TileDB interface {
+//LoadTiles() map[string][3]float64
+//}

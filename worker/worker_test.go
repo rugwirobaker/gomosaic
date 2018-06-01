@@ -94,16 +94,4 @@ func TestAverageColor(t *testing.T) {
 	}
 }
 
-func TestLoadTileDB(t *testing.T) {
-	testDB := map[string][3]float64{}
-	db := LoadTileDB()
-	//type test
-	if reflect.TypeOf(db).Name() != reflect.TypeOf(testDB).Name() {
-		t.Error("Expected type: float64 got", reflect.TypeOf(db).Name())
-		return
-	}
-	//test for return value lens
-	//if len(db) == 0 {
-	//t.Error("Expected a hash table LoadDB returned an empty hash table")
-	//}
-}
+//testing the tile DB
