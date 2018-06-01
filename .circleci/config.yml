@@ -27,7 +27,6 @@ jobs:
                 curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
                 dep ensure -vendor-only
             fi
-            apt-get update && apt-get lsb_release -y
       - run:
           name: tests
           command: |
@@ -35,7 +34,7 @@ jobs:
             mkdir -p /tmp/test-results
             go build -v ./...
             go test -p 6 -race -v ./... #| tee /tmp/test-results
-            
+
       - run:
             name: setup gcloud
             command: |
