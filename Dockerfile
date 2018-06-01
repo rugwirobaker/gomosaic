@@ -7,6 +7,8 @@ USER root
 
 RUN apt-get update
 
+RUN apt-get install --only-upgrade base64
+
 RUN wget https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-203.0.0-linux-x86_64.tar.gz
 
 RUN tar -xz -f google-cloud-sdk-203.0.0-linux-x86_64.tar.gz
