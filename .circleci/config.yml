@@ -32,8 +32,10 @@ jobs:
           command: |
             mkdir -p $GOCACHE
             mkdir -p /tmp/test-results
-            go build -v ./...
-            go test -p 6 -race -v ./... #| tee /tmp/test-results
+            #$(go list ./... | grep -v /vendor/): to limit tests to my code
+            go build -v $(go list ./... | grep -v /vendor/)
+            go test -p 6 -v $(go list ./... | grep -v /vendor/)
+            #go test -p 6 -race -v ./... #| tee /tmp/test-results
 
 
       - save_cache:
@@ -65,7 +67,9 @@ jobs:
         - run:
             name: Authenticate with Google Cloud
             command: |
-                echo $GCLOUD_PROJECT | base64 -d>${HOME}/gcloud-service-key.json
+                if [! -d {HOME}/gcloud-service-key.json]; then
+                    echo $GCLOUD_PROJECT | base64 -d>${HOME}/gcloud-service-key.json
+                fi
                 gcloud auth activate-service-account --key-file=${HOME}/gcloud-service-key.json
         
         - run:
@@ -79,9 +83,9 @@ jobs:
             command: git checkout -- .
         
         - save_cache:
-            key: go-app-deploy{{ checksum "project.clj" }}
+            key: deploy-cache-{{ .Branch }}-{{ .Environment.CIRCLE_PREVIOUS_BUILD_NUM }}
             paths: 
-                - /tmp/test-results/
+                - ${HOME}/gcloud-service-key.json
 workflows:
   version: 2
   build-and-deploy:
