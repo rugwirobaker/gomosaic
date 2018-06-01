@@ -39,7 +39,7 @@ jobs:
             name: setup gcloud
             command: |
                 wget https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-203.0.0-linux-x86_64.tar.gz
-                mv google-cloud-sdk-203.0.0-linux-x86_64.tar.gz/* /usr/bin
+                mv google-cloud-sdk-203.0.0-linux-x86_64.tar.gz /usr/bin
                 tar -xz -C /usr/bin -f google-cloud-sdk-203.0.0-linux-x86_64.tar.gz
                 ./google-cloud-sdk/install.sh
 
