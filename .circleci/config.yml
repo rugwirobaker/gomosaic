@@ -6,7 +6,7 @@ jobs:
   build:
     docker:
       # specify the version
-      - image: circleci/golang:1.10.0
+      - image: codebaker/gomasaic:staging
       
     working_directory: /go/src/github.com/rugwirobaker/gomosaic
 
@@ -50,14 +50,7 @@ jobs:
     working_directory: /go/src/github.com/rugwirobaker/gomosaic
     steps:
         - checkout
-        - run: 
-            name: setup gcloud
-            command: |
-                wget https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-203.0.0-linux-x86_64.tar.gz
-                mv google-cloud-sdk-203.0.0-linux-x86_64.tar.gz /usr/bin/google-cloud-sdk-203.0.0-linux-x86_64.tar.gz
-                tar -xz -C /usr/bin -f /usr/bin/google-cloud-sdk-203.0.0-linux-x86_64.tar.gz
-                CLOUDSDK_CORE_DISABLE_PROMPTS=1 /usr/bin/google-cloud-sdk/install.sh
-                
+
         - restore_cache:
             key: build-cache-{{ .Branch }}-{{ .Environment.CIRCLE_PREVIOUS_BUILD_NUM }}
         
