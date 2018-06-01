@@ -23,10 +23,8 @@ jobs:
       - run:
           name: download-libraries
           command: |
-            if [ ! -d /go/src/github.com/rugwirobaker/gomosaic/vendor ]; then
-                curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
-                dep ensure -vendor-only
-            fi
+            go get -u github.com/golang/dep/cmd/dep      
+            cd app && dep ensure
       - run:
           name: tests
           command: |
@@ -54,9 +52,14 @@ jobs:
         - restore_cache:
             key: build-cache-{{ .Branch }}-{{ .Environment.CIRCLE_PREVIOUS_BUILD_NUM }}
         
+
         - run:
             name: Authenticate with Google Cloud
             command: |
+                #dependecies
+                go get -u github.com/golang/dep/cmd/dep      
+                cd app && dep ensure
+                #setup gcloud project
                 echo $GCLOUD_SERVICE_KEY | base64 -d>${HOME}/gcloud-service-key.json
                 gcloud auth activate-service-account --key-file=${HOME}/gcloud-service-key.json
         
