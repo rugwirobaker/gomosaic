@@ -70,13 +70,13 @@ jobs:
                 if [ ! -e {HOME}/gcloud-service-key.json ]; then
                     echo $GCLOUD_SERVICE_KEY | base64 --decode --ignore-garbage > ${HOME}/gcloud-service-key.json
                 fi
-                sudo /usr/bin/google-cloud-sdk/gcloud auth activate-service-account --key-file=${HOME}/gcloud-service-key.json
+                sudo /usr/lib/google-cloud-sdk/gcloud auth activate-service-account --key-file=${HOME}/gcloud-service-key.json
         
         - run:
             name: GAE Deploy
             command: |
-                sudo /usr/bin/google-cloud-sdk/gcloud config set project $GCLOUD_PROJECT
-                sudo /usr/bin/google-cloud-sdk/gcloud -q app deploy engine/app.yaml --promote --version=staging
+                sudo /usr/lib/google-cloud-sdk/gcloud config set project $GCLOUD_PROJECT
+                sudo /usr/lib/google-cloud-sdk/gcloud -q app deploy engine/app.yaml --promote --version=staging
         
         - run:
             name: discarding all changes
