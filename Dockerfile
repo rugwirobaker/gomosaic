@@ -15,9 +15,9 @@ RUN tar -xz -C /usr/bin -f google-cloud-sdk-203.0.0-linux-x86_64.tar.gz &&\
     #mv google-cloud-sdk /usr/bin/. &&\
     CLOUDSDK_CORE_DISABLE_PROMPTS=1 /usr/bin/google-cloud-sdk/install.sh
 
-RUN /bin/bash -c "source /usr/bin/google-cloud-sdk/completion.bash.inc"
+RUN ["/bin/bash", "-c", "source /usr/bin/google-cloud-sdk/completion.bash.inc"]
 
-RUN /bin/bash -c "source /usr/bin/google-cloud-sdk/path.bash.inc"
+RUN ["/bin/bash", "-c", "source /usr/bin/google-cloud-sdk/path.bash.inc"]
 
 
 
