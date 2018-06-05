@@ -75,8 +75,8 @@ jobs:
         - run:
             name: GAE Deploy
             command: |
-                sudo /usr/lib/google-cloud-sdk/gcloud config set project $GCLOUD_PROJECT
-                sudo /usr/lib/google-cloud-sdk/gcloud -q app deploy engine/app.yaml --promote --version=staging
+                sudo /usr/bin/gcloud config set project $GCLOUD_PROJECT
+                sudo /usr/bin/gcloud -q app deploy engine/app.yaml --promote --version=staging
         
         - run:
             name: discarding all changes
