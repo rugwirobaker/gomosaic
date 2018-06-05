@@ -6,7 +6,7 @@ jobs:
   build:
     docker:
       # specify the version
-      - image: codebaker/gomosaic:staging
+      - image: codebaker/gomosaic:v1
       
     working_directory: /go/src/github.com/rugwirobaker/gomosaic
 
@@ -47,7 +47,7 @@ jobs:
           path:  /tmp/test-results
   deploy:
     docker:
-      - image: codebaker/gomosaic:staging
+      - image: codebaker/gomosaic:v1
 
     working_directory: /go/src/github.com/rugwirobaker/gomosaic
     steps:
