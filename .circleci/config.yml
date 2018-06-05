@@ -44,7 +44,7 @@ jobs:
               - /go/src/github.com/rugwirobaker/vendor
 
       - store_test_results:
-          path:  /tmp/test-results
+          path: test-results
   deploy:
     docker:
       - image: codebaker/gomosaic:v1
